@@ -49,7 +49,7 @@
 | municipality  | string     | null: false |
 | street_number | string     | null: false |
 | building_name | string     |
-| phone_number  | int        | null: false |
+| phone_number  | string     | null: false |
 
 ### Association
 
