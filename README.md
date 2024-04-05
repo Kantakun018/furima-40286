@@ -24,17 +24,15 @@
 | Column                 | Type       | Options     |
 | -----------------------| ---------- | ----------- |
 | id                     | int        | null: false, unique: true |
-| image                  | text       | null: false |
 | name                   | string     | null: false |
 | description            | text       | null: false |
-| category               | string     | null: false |
-| condition              | string     | null: false |
-| shipping_fee           | string     | null: false |
-| shipfrom_area          | string     | null: false |
-| days_until_shipping    | string     | null: false |
+| category_id            | int        | null: false |
+| condition_id           | int        | null: false |
+| shipping_fee_id        | int        | null: false |
+| prefecture_id          | int        | null: false |
+| days_until_shipping_id | int        | null: false |
 | price                  | int        | null: false |
-| purchase_status        | text       | 
-| seller_id              | references | null: false, foreign_key: true |
+| user                   | references | null: false, foreign_key: true |
 
 ### Association
 
@@ -47,27 +45,27 @@
 | --------------| ---------- | ----------- |
 | id            | int        | null: false, unique: true |
 | postal_code   | string     | null: false |
-| prefecture    | string     | null: false |
-| municipality  | text       | null: false |
-| street_number | text       | null: false |
-| building_name | text       |
+| prefecture_id | int        | null: false |
+| municipality  | string     | null: false |
+| street_number | string     | null: false |
+| building_name | string     |
 | phone_number  | int        | null: false |
 
 ### Association
 
-- has_many :purchase_records
+- belongs_to :purchase_record
 
 ## purchase_records テーブル
 
 | Column                 | Type    | Options                   |
 | -----------------------| --------| ------------------------- |
 | id                     | int     | null: false, unique: true |
-| buyer_id               | int     | null: false, foreign_key: true |
+| user                   | int     | null: false, foreign_key: true |
 | item_id                | int     | null: false, foreign_key: true |
-| shipto_address_id      | int     | null: false, foreign_key: true |
+| purchase_record_id     | int     | null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to :user
 - belongs_to :item
-- belongs_to :shipto_address
+- has_one :shipto_address
