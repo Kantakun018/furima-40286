@@ -41,15 +41,16 @@
 
 ## shipto_address テーブル
 
-| Column        | Type       | Options     |
-| --------------| ---------- | ----------- |
-| id            | int        | null: false, unique: true |
-| postal_code   | string     | null: false |
-| prefecture_id | int        | null: false |
-| municipality  | string     | null: false |
-| street_number | string     | null: false |
-| building_name | string     |
-| phone_number  | string     | null: false |
+| Column              | Type       | Options     |
+| --------------------| ---------- | ----------- |
+| id                  | int        | null: false, unique: true |
+| postal_code         | string     | null: false |
+| prefecture_id       | int        | null: false |
+| municipality        | string     | null: false |
+| street_number       | string     | null: false |
+| building_name       | string     |
+| phone_number        | string     | null: false |
+| purchase_record     | references | null: false, foreign_key: true |
 
 ### Association
 
@@ -57,12 +58,11 @@
 
 ## purchase_records テーブル
 
-| Column                 | Type    | Options                   |
-| -----------------------| --------| ------------------------- |
-| id                     | int     | null: false, unique: true |
-| user                   | int     | null: false, foreign_key: true |
-| item_id                | int     | null: false, foreign_key: true |
-| purchase_record_id     | int     | null: false, foreign_key: true |
+| Column                 | Type       | Options                   |
+| -----------------------| -----------| ------------------------- |
+| id                     | int        | null: false, unique: true |
+| user                   | references | null: false, foreign_key: true |
+| item                   | references | null: false, foreign_key: true |
 
 ### Association
 
