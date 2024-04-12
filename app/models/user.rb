@@ -24,4 +24,6 @@ class User < ApplicationRecord
   validates :last_name_yomi, format: { with: /\A[ァ-ヶー－]+\z/, message: "には全角カタカナを使用してください" }
   validates :first_name_yomi, format: { with: /\A[ァ-ヶー－]+\z/, message: "には全角カタカナを使用してください" }
 
+  has_many :items
+
 end
