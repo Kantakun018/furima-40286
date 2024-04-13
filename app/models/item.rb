@@ -19,7 +19,6 @@ class Item < ApplicationRecord
   validates :days_until_shipping_id, numericality: { other_than: 1 , message: "can't be blank"}
   validates :price,                  presence: true
   validates :price,                  numericality: { in: 300..9999999 }
-  validates :price,                  format: { with: /\A[0-9]+\z/ }
-  validates :user,                   presence: true
+  validates :price,                  numericality: { only_integer: true }
 
 end
