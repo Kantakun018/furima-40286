@@ -18,7 +18,5 @@ class Item < ApplicationRecord
   validates :prefecture_id,          numericality: { other_than: 1 , message: "can't be blank"}
   validates :days_until_shipping_id, numericality: { other_than: 1 , message: "can't be blank"}
   validates :price,                  presence: true
-  validates :price,                  numericality: { in: 300..9999999 }
-  validates :price,                  numericality: { only_integer: true }
-
+  validates :price,                  numericality: { only_integer: true }, numericality: { in: 300..9999999 }
 end
