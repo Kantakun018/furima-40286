@@ -3,6 +3,8 @@ class ItemsController < ApplicationController
   before_action :move_to_signin, except: [:index]
 
   def index
+    query = "select * from items order by created_at desc"
+    @items = Item.find_by_sql(query)
   end
 
   def new
