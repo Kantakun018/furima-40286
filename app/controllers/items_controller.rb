@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
 
-  before_action :move_to_signin, except: [:index]
+  before_action :move_to_signin, except: [:index, :show]
 
   def index
     query = "select * from items order by created_at desc"
@@ -18,6 +18,11 @@ class ItemsController < ApplicationController
     else
       render :new, status: :unprocessable_entity
     end
+  end
+
+  def show
+    # 選択された対象のitemの情報を取得
+      @item = Item.find(params[:id])
   end
 
   private
