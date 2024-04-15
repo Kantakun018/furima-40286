@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
 
   before_action :move_to_signin, except: [:index, :show]
-  before_action :get_target_item, only: [:show, :edit, :update]
+  before_action :get_target_item, only: [:show, :edit, :update, :destroy]
 
   def index
     query = "select * from items order by created_at desc"
@@ -36,6 +36,13 @@ class ItemsController < ApplicationController
     else
       render :edit, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    if current_user.id == @item.user_id
+      @item.destroy
+    end
+    redirect_to root_path
   end
 
   private
