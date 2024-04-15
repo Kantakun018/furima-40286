@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
 
   before_action :move_to_signin, except: [:index, :show]
-  before_action :get_target_item, only: [:edit, :update]
+  before_action :get_target_item, only: [:show, :edit, :update]
 
   def index
     query = "select * from items order by created_at desc"
@@ -22,8 +22,6 @@ class ItemsController < ApplicationController
   end
 
   def show
-    # 選択された対象のitemの情報を取得
-    @item = Item.find(params[:id])
   end
 
   def edit
