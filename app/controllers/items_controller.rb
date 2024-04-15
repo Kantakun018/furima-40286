@@ -1,6 +1,7 @@
 class ItemsController < ApplicationController
 
   before_action :move_to_signin, except: [:index, :show]
+  before_action :get_target_item, only: [:edit, :update]
 
   def index
     query = "select * from items order by created_at desc"
@@ -26,14 +27,12 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    @item = Item.find(params[:id])
     if current_user.id != @item.user_id
       redirect_to root_path
     end
   end
 
   def update
-    @item = Item.find(params[:id])
     if @item.update(item_params)
       redirect_to item_path(@item.id)
     else
@@ -60,6 +59,10 @@ class ItemsController < ApplicationController
     unless user_signed_in?
       redirect_to new_user_session_path
     end
+  end
+
+  def get_target_item
+    @item = Item.find(params[:id])
   end
 
 end
