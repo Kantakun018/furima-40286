@@ -1,3 +1,4 @@
+<%= include_gon %>
 <%= render "shared/second-header"%>
 
 <div class='transaction-contents'>
@@ -31,7 +32,6 @@
     </div>
     <%# /支払額の表示 %>
 
-    <%# <%= form_with id: 'charge-form', class: 'transaction-form-wrap',local: true do |f| %> 
     <%= form_with id: 'charge-form',model: @purchase_address, url: item_purchase_records_path, class: 'transaction-form-wrap',local: true do |f| %>
 
     <%= render 'shared/error_messages', model: f.object %>
@@ -45,9 +45,8 @@
         <div class='form-text-wrap'>
           <label class="form-text">カード情報</label>
           <span class="indispensable">必須</span>
-          <%# <%= f.text_field , class:"price-input", id:"item-price"%> 
         </div>
-        <div id="number-form" class="input-default"></div>
+        <div id="number-form" class="input-default"></div> 
         <div class='available-card'>
           <%= image_tag 'card-visa.gif', class: 'card-logo'%>
           <%= image_tag 'card-mastercard.gif', class: 'card-logo'%>

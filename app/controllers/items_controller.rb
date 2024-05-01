@@ -2,6 +2,7 @@ class ItemsController < ApplicationController
 
   before_action :move_to_signin, except: [:index, :show]
   before_action :get_target_item, only: [:show, :edit, :update, :destroy]
+  before_action :get_purchase_records, only: [:index, :show, :edit]
 
   def index
     query = "select * from items order by created_at desc"
@@ -25,7 +26,7 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    if current_user.id != @item.user_id
+    if (current_user.id != @item.user_id) || (@purchase_records.exists?(item_id: @item.id))
       redirect_to root_path
     end
   end
@@ -68,6 +69,10 @@ class ItemsController < ApplicationController
 
   def get_target_item
     @item = Item.find(params[:id])
+  end
+
+  def get_purchase_records
+    @purchase_records = PurchaseRecord.all
   end
 
 end
