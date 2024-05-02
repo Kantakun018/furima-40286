@@ -13,6 +13,7 @@ RSpec.describe PurchaseAddress, type: :model do
   describe '商品購入機能' do
     context '商品購入できるとき' do
       it '全ての必須項目を入力 かつ 要件を満たせば登録できる' do
+        @purchase_address.building_name = ''
         expect(@purchase_address).to be_valid
       end
     end

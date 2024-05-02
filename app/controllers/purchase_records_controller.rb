@@ -1,8 +1,9 @@
 class PurchaseRecordsController < ApplicationController
 
+  before_action :get_target_item, only: [:index, :create]
+
   def index
     gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
-    @item = Item.find(params[:item_id])
     @purchase_records = PurchaseRecord.all
     if !user_signed_in?
       redirect_to new_user_session_path
@@ -15,7 +16,6 @@ class PurchaseRecordsController < ApplicationController
   end
 
   def create
-    @item = Item.find(params[:item_id])
     @purchase_address = PurchaseAddress.new(purchase_record_params)
 
     if @purchase_address.valid?
@@ -26,6 +26,11 @@ class PurchaseRecordsController < ApplicationController
       gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
       render :index, status: :unprocessable_entity
     end
+  end
+
+  private
+  def get_target_item
+    @item = Item.find(params[:item_id])
   end
 
   def purchase_record_params
