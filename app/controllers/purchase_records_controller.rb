@@ -11,7 +11,6 @@ class PurchaseRecordsController < ApplicationController
       redirect_to root_path
     else
       @purchase_address = PurchaseAddress.new
-      @item = Item.find(params[:item_id])
     end
   end
 
